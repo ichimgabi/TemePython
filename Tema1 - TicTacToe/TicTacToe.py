@@ -2,11 +2,13 @@ import random
 
 tabla = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
 choice = ["X", "O"]
+# Variabila start retine care dintre jucatori incepe jocul (X este primul, O este al doilea);
 start = random.choice(choice)
 nr_moves = 0
 win = 0
 
 
+# print_board afiseaza tabla;
 def print_board():
     k = 0
     for i in tabla:
@@ -20,6 +22,7 @@ def print_board():
             print("\n")
 
 
+# is_win_x si is_win_o verifica toate combinatiile posibile de castig ale jucatorilor;
 def is_win_x():
     if tabla[0] == tabla[3] == tabla[6] == "X":
         return 1
@@ -62,6 +65,7 @@ def is_win_o():
         return 0
 
 
+# computer_moves alege mutarile pe care le poate face calculatorul, respectand regulile din cerinta;
 def computer_moves(move):
     if tabla[4] == " ":
         tabla[4] = move

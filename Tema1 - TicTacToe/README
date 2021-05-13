@@ -1,0 +1,5 @@
+Jocul ruleaza intr-un while loop, fie pana cand unul din jucatori castiga, fie pana cand au fost efectuate toate
+mutarile posibile.
+Mutarlile jucatorului sunt verificate pentru validitate, iar in caz contrar se cere reefectuarea
+acestora.
+
