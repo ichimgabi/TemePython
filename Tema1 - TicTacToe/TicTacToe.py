@@ -1,12 +1,5 @@
 import random
 
-tabla = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-choice = ["X", "O"]
-# Variabila start retine care dintre jucatori incepe jocul (X este primul, O este al doilea);
-start = random.choice(choice)
-nr_moves = 0
-win = 0
-
 
 # print_board afiseaza tabla;
 def print_board():
@@ -23,43 +16,22 @@ def print_board():
 
 
 # is_win_x si is_win_o verifica toate combinatiile posibile de castig ale jucatorilor;
-def is_win_x():
-    if tabla[0] == tabla[3] == tabla[6] == "X":
+def is_win(move):
+    if tabla[0] == tabla[3] == tabla[6] == move:
         return 1
-    elif tabla[0] == tabla[1] == tabla[2] == "X":
+    elif tabla[0] == tabla[1] == tabla[2] == move:
         return 1
-    elif tabla[6] == tabla[7] == tabla[8] == "X":
+    elif tabla[6] == tabla[7] == tabla[8] == move:
         return 1
-    elif tabla[2] == tabla[5] == tabla[8] == "X":
+    elif tabla[2] == tabla[5] == tabla[8] == move:
         return 1
-    elif tabla[0] == tabla[4] == tabla[8] == "X":
+    elif tabla[0] == tabla[4] == tabla[8] == move:
         return 1
-    elif tabla[2] == tabla[4] == tabla[6] == "X":
+    elif tabla[2] == tabla[4] == tabla[6] == move:
         return 1
-    elif tabla[1] == tabla[4] == tabla[7] == "X":
+    elif tabla[1] == tabla[4] == tabla[7] == move:
         return 1
-    elif tabla[3] == tabla[4] == tabla[5] == "X":
-        return 1
-    else:
-        return 0
-
-
-def is_win_o():
-    if tabla[0] == tabla[3] == tabla[6] == "O":
-        return 1
-    elif tabla[0] == tabla[1] == tabla[2] == "O":
-        return 1
-    elif tabla[6] == tabla[7] == tabla[8] == "O":
-        return 1
-    elif tabla[2] == tabla[5] == tabla[8] == "O":
-        return 1
-    elif tabla[0] == tabla[4] == tabla[8] == "O":
-        return 1
-    elif tabla[2] == tabla[4] == tabla[6] == "O":
-        return 1
-    elif tabla[1] == tabla[4] == tabla[7] == "O":
-        return 1
-    elif tabla[3] == tabla[4] == tabla[5] == "O":
+    elif tabla[3] == tabla[4] == tabla[5] == move:
         return 1
     else:
         return 0
@@ -87,6 +59,12 @@ def computer_moves(move):
         tabla[7] = move
 
 
+tabla = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+choice = ["X", "O"]
+# Variabila start retine care dintre jucatori incepe jocul (X este primul, O este al doilea);
+start = random.choice(choice)
+nr_moves = 0
+
 if start == "X":
     print_board()
     while True:
@@ -94,8 +72,7 @@ if start == "X":
         if tabla[int(m) - 1] == " ":
             tabla[int(m) - 1] = "X"
             nr_moves += 1
-            win = is_win_x()
-            if win == 1:
+            if is_win("X") == 1:
                 print("Ai castigat!")
                 break
             if nr_moves == 9:
@@ -104,8 +81,7 @@ if start == "X":
             print("Mutarea calculatorului")
             computer_moves("O")
             print_board()
-            win = is_win_o()
-            if win == 1:
+            if is_win("O") == 1:
                 print("Ai pierdut!")
                 break
             nr_moves += 1
@@ -120,8 +96,7 @@ else:
         if tabla[int(m) - 1] == " ":
             tabla[int(m) - 1] = "O"
             nr_moves += 1
-            win = is_win_o()
-            if win == 1:
+            if is_win("O") == 1:
                 print("Ai castigat!")
                 break
             if nr_moves == 9:
@@ -131,10 +106,11 @@ else:
             computer_moves("X")
             print_board()
             nr_moves += 1
-            win = is_win_x()
-            if win == 1:
+            if is_win("X") == 1:
                 print("Ai pierdut!")
+                break
             if nr_moves == 9:
                 print("Egalitate")
+                break
         else:
             print("Mutare invalida!")
